@@ -1,0 +1,5 @@
+KundeID: 12312 Pris: 123123 Dato: asadasd1
+KundeID: 1234 Pris: 12432 Dato: 01-03-1999 16:30
+KundeID: 1 Pris: 200 Dato: 26-10-2023 16:30'
+KundeID: 11012 Pris: 200 Dato: 01-10-2202 16:30
+KundeID: 123 Pris: 422,- Dato: 10-10-2200 08:50
