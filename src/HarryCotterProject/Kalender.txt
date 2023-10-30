@@ -3,3 +3,14 @@ KundeID: 1234 Pris: 12432 Dato: 01-03-1999 16:30
 KundeID: 1 Pris: 200 Dato: 26-10-2023 16:30'
 KundeID: 11012 Pris: 200 Dato: 01-10-2202 16:30
 KundeID: 123 Pris: 422,- Dato: 10-10-2200 08:50
+KundeID: 11 Pris: 11,- Dato: asd
+KundeID: 1 Pris: 1,- Dato: sad
+KundeID: 1 Pris: 1,- Dato: ad
+KundeID: 1 Pris: 1,- Dato: asd
+KundeID: 1 Pris: 1,- Dato: asd
+KundeID: 11 Pris: 1,- Dato: asdas
+KundeID: 1 Pris: 1,- Dato: asd
+KundeID: 1 Pris: 1,- Dato: asda
+KundeID: 12 Pris: 200,- Dato: 30-10-2023 Klokken: 08:10
+KundeID: 1 Pris: 1,- Dato: 10-10-1999 Klokken: 10:50
+KundeID: 1 Pris: 1,- Dato: 10-10_1999 Klokken: 10:10

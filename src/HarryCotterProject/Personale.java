@@ -1,9 +1,6 @@
 package HarryCotterProject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Scanner;
 
 public class Personale extends Person {
@@ -30,15 +27,15 @@ public class Personale extends Person {
             int pris = scanner.nextInt();
             scanner.nextLine(); //SCANNERBUG
 
-            System.out.println("Skriv dato og tidspunkt([DD-MM-ÅÅÅÅ] [TT:MM]):");
+            System.out.println("Skriv dato([DD-MM-ÅÅÅÅ]):");
+            String dato = scanner.nextLine();
+            System.out.println("Skriv tidspunkt( [TT:MM]):");
             String tidspunkt = scanner.nextLine();
 
-            //TODO Vi skal have seperet tidspunktet fra datoen, så det ikke står samlet fx 2 variabler.
-
-            Aftale aftale = new Aftale(kundeID, pris, tidspunkt, betalt);
-            ps.println("KundeID: " + kundeID + " Pris: " + pris + ",- Dato: " + tidspunkt);
+            Aftale aftale = new Aftale(kundeID, pris, dato, tidspunkt, betalt);
+            ps.println("KundeID: " + kundeID + " Pris: " + pris + ",- Dato: " + dato + " Klokken: " + tidspunkt);
             System.out.println("Aftalen er gemt og ser sådan ud:");
-            System.out.println("KundeID: " + kundeID + " Pris: " + pris + ",- Dato: " + tidspunkt);
+            System.out.println("KundeID: " + kundeID + " Pris: " + pris + ",- Dato: " + dato + " Klokken: " + tidspunkt);
 
 
         } catch (FileNotFoundException e) {
@@ -50,12 +47,30 @@ public class Personale extends Person {
         vaelgMenu();
     }
 
-
     public void sletAftale() {
+        System.out.println("Vælg hvilken linje du vil slette.");
+        System.out.println(kalenderFil);
+
+        int idSlettes = -1;
+        int linje = scanner.nextInt();
+
+        StringBuilder indhold = new StringBuilder();
         try {
-            Scanner fileScanner = new Scanner(kalenderFil);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            PrintWriter tekstTilFil = new PrintWriter(new FileWriter(kalenderFil));
+
+            BufferedReader tekst = new BufferedReader(new FileReader(kalenderFil));
+            while (filescanner.hasNextLine()) {
+                if (linje != idSlettes) {
+//                    tekstTilFil.println(linje);
+                }
+                linje++;
+
+            }
+
+            filescanner = new Scanner(kalenderFil);
+            System.out.println(kalenderFil);
+        } catch (Exception e) {
+            System.out.println("Fejl opstod. Find en mur.");
         }
         vaelgMenu();
     }
@@ -74,7 +89,6 @@ public class Personale extends Person {
             System.out.println("Der opstod en fejl. Kontakt en udvikler.");
         }
         filescanner.close();
-        vaelgMenu();
     }
 
     public void modtagBetaling() {
@@ -83,5 +97,4 @@ public class Personale extends Person {
         betalt = true;
         vaelgMenu();
     }
-
 }
