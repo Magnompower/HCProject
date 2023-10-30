@@ -7,6 +7,9 @@ public class Aftale {
     int aftaleID;
     int kundeID; // ARRAYLIST? Forestiller mig det giver mere mening at lave en arraylist med Kunde objekter
     int pris;
+    int dag;
+    int maaned;
+    int aar;
     String dato;
     String tidspunkt;
     boolean betalt;
@@ -21,13 +24,5 @@ public class Aftale {
         this.tidspunkt = tidspunkt;
 //        aftaleID = forløkke! TODO
         this.betalt = betalt;
-    }
-
-    private void visRegnskab() {
-
-    }
-
-    private void visKalender() {
-
     }
 }
