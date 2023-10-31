@@ -27,7 +27,7 @@ public class MenuRunner {
             } else if (personaleType == 2) {
                 vaelgFraPersonaleMenu();
             } else if (personaleType == 3) {
-                vaelgFraRevisorMenu();
+                vaelgFraRevisorMenu(kalender);
             }
         } while (valg != 0);
     }
@@ -45,10 +45,10 @@ public class MenuRunner {
         int valg = scanner.nextInt();
         switch (valg) {
             case 0 -> afslutProgram();
-            case 1 -> ejer.opretAftale();
-            case 2 -> ejer.sletAftale();
-            case 3 -> ejer.visKalender();
-            case 4 -> ejer.modtagBetaling();
+            case 1 -> ejer.opretAftale(kalender);
+            case 2 -> ejer.sletAftale(kalender);
+            case 3 -> ejer.visKalender(kalender);
+            case 4 -> ejer.modtagBetaling(kalender);
             case 5 -> ejer.visRegnskab();
             case 9 -> visHovedmenu();
         }
@@ -59,11 +59,11 @@ public class MenuRunner {
         int valg = scanner.nextInt();
         switch (valg) {
             case 0 -> afslutProgram();
-            case 1 -> personale.opretAftale();
-            case 2 -> personale.sletAftale();
-            case 3 -> personale.visKalender();
-            case 4 -> personale.modtagBetaling();
-            case 9 -> visHovedmenu();
+            case 1 -> personale.opretAftale(kalender);
+            case 2 -> personale.sletAftale(kalender);
+            case 3 -> personale.visKalender(kalender);
+            case 4 -> personale.modtagBetaling(kalender);
+            case 9 -> visHovedmenu(kalender);
         }
     }
 
@@ -77,13 +77,14 @@ public class MenuRunner {
             case 9 -> visHovedmenu();
         }
     }
+//    TODO hvis invalid svar dør programmet.1
 
         public void afslutProgram() {
             valg = 0;
         }
 
-        public void visHovedmenu () {
-            vaelgFraHovedmenu();
+        public void visHovedmenu (Kalender kalender) {
+            vaelgFraHovedmenu(kalender);
         }
 
         public String[] punkterStartMenu () {

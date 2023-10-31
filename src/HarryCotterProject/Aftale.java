@@ -1,11 +1,11 @@
 package HarryCotterProject;
 
-import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+
 public class Aftale {
 
     Kunde kunde;
@@ -30,21 +30,16 @@ public class Aftale {
     }
 
 
-    public Kunde getKunde(){
-        return kunde;
-    }
-
-    public int getPris(){
+    public int getPris() {
         return pris;
     }
-
 
     public LocalDateTime getDato() {
         return dato;
     }
 
-
+    public Kunde getKunde() {
+        return kunde;
+    }
 
 }
-
-

@@ -9,10 +9,6 @@ public class Personale extends Person {
     private Scanner filescanner = null;
     Scanner scanner = new Scanner(System.in);
     private boolean betalt;
-    Kalender kalender = new Kalender();
-
-    private File kalenderFil = new File("src\\HarryCotterProject\\Kalender.txt"); //skal ikke være her
-
 
     public Personale(String navn, int id) {
         super(navn, id);
@@ -51,7 +47,7 @@ public class Personale extends Person {
         System.out.println(kalenderFil);
 
         int idSlettes = -1;
-        int linje = scanner.nextInt();
+
 
         StringBuilder indhold = new StringBuilder();
         try {
@@ -59,10 +55,10 @@ public class Personale extends Person {
 
             BufferedReader tekst = new BufferedReader(new FileReader(kalenderFil));
             while (filescanner.hasNextLine()) {
-                if (linje != idSlettes) {
-//                  tekstTilFil.println(linje);
+                if (linjeSlettes != idSlettes) {
+//                  tekstTilFil.println(linjeSlettes);
                 }
-                linje++;
+                linjeSlettes++;
 
             }
 
@@ -71,18 +67,16 @@ public class Personale extends Person {
         } catch (Exception e) {
             System.out.println("Fejl opstod. Find en mur.");
         }
-    }
 
-    public void visKalender() {
+
+    public void visKalender(Kalender kalender) {
         System.out.println("Dette er kalenderen:");
         try {
-            filescanner = new Scanner(kalenderFil);
+            filescanner = new Scanner(kalender.getKalenderFil());
             while (filescanner.hasNextLine()) {
                 String s = filescanner.nextLine();
                 System.out.println(s);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Filen blev ikke fundet. Prøv igen");
         } catch (Exception e) {
             System.out.println("Der opstod en fejl. Kontakt en udvikler.");
         }
