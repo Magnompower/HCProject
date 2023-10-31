@@ -1,8 +1,8 @@
 package HarryCotterProject;
 
 public class Person {
-    String navn;
-    int id;
+    private String navn;
+    private int id;
 
     public Person(String navn, int id) {
         this.navn = navn;

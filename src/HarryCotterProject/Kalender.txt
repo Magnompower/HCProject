@@ -14,3 +14,5 @@ KundeID: 1 Pris: 1,- Dato: asda
 KundeID: 12 Pris: 200,- Dato: 30-10-2023 Klokken: 08:10
 KundeID: 1 Pris: 1,- Dato: 10-10-1999 Klokken: 10:50
 KundeID: 1 Pris: 1,- Dato: 10-10_1999 Klokken: 10:10
+Navn: Julius Jullemus Tlf: 69696969 Pris: 121,- Tidspunkt: 2001-02-21T20:00
+Navn: Magne Bigdaddy Tlf: 6969696 Pris: 800,- Tidspunkt: 2012-12-12T20:00

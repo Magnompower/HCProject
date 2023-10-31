@@ -8,8 +8,8 @@ public class MenuRunner {
     Menu menuPersonale = new Menu("Personalemenu:", punkterPersonaleMenu());
     Menu menuRevisor = new Menu("Revisormenu:", punkterRevisorMenu());
 
-    int personaleType = -1;
-    int valg = -1;
+    private int personaleType = -1;
+    private int valg = -1;
     Ejer ejer = null;
     Personale personale = null;
     Scanner scanner = new Scanner(System.in);
@@ -54,7 +54,7 @@ public class MenuRunner {
         }
     }
 
-    public void vaelgFraPersonaleMenu() {
+    private void vaelgFraPersonaleMenu() {
         menuPersonale.printMenu();
         int valg = scanner.nextInt();
         switch (valg) {
