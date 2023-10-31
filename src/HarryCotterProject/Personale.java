@@ -9,6 +9,7 @@ public class Personale extends Person {
 
     Scanner filescanner = null;
     Scanner scanner = new Scanner(System.in);
+    Kalender kalender = new Kalender();
     File kalenderFil = new File("src\\HarryCotterProject\\Kalender.txt");
     boolean betalt;
 
@@ -16,6 +17,26 @@ public class Personale extends Person {
         super(navn, id);
     }
 
+    public void xopretAftale(){
+        System.out.println("Skriv kundeID:");
+        int kundeID = scanner.nextInt();
+
+        System.out.println("Skriv pris:");
+        int pris = scanner.nextInt();
+        scanner.nextLine(); //SCANNERBUG
+
+        System.out.println("Skriv dato([DD-MM-ÅÅÅÅ]):");
+        String dato = scanner.nextLine();
+        System.out.println("Skriv tidspunkt( [TT:MM]):");
+        String tidspunkt = scanner.nextLine();
+
+        Aftale aftale = new Aftale(kundeID, pris, dato, tidspunkt, betalt);
+
+        kalender.addAftalteTilKalender(aftale);
+
+
+
+    }
     public void opretAftale() {
         PrintStream ps = null;
         try {
@@ -44,7 +65,6 @@ public class Personale extends Person {
             System.out.println("Der skete en fejl. Kontakt en udvikler.");
         }
         ps.close();
-        vaelgMenu();
     }
 
     public void sletAftale() {
@@ -72,7 +92,7 @@ public class Personale extends Person {
         } catch (Exception e) {
             System.out.println("Fejl opstod. Find en mur.");
         }
-        vaelgMenu();
+        filescanner.close();
     }
 
     public void visKalender() {
@@ -95,6 +115,5 @@ public class Personale extends Person {
         System.out.println("Vælg aftale:");
         kassebeholdning = kassebeholdning + betalingssum;
         betalt = true;
-        vaelgMenu();
     }
 }

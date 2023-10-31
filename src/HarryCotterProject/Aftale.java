@@ -15,7 +15,7 @@ public class Aftale {
     boolean betalt;
     //    service
     ArrayList<Aftale> regnskab;
-    ArrayList<Aftale> kalender;
+
 
     public Aftale(int kundeID, int pris, String dato, String tidspunkt, boolean betalt) {
         this.kundeID = kundeID;

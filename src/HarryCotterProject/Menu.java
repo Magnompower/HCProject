@@ -1,8 +1,11 @@
 package HarryCotterProject;
 
+import java.util.Scanner;
+
 public class Menu {
     private String menuOverskrift;
     private String[] menuPunkt;
+
 
     public Menu(String menuOverskrift, String[] menuPunkt) {
         this.menuOverskrift = menuOverskrift;
@@ -14,4 +17,5 @@ public class Menu {
         for (int i = 0; i < menuPunkt.length; i++) printString += menuPunkt[i] + "\n";
         System.out.println("\n" + printString);
     }
+
 }
