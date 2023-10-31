@@ -8,7 +8,7 @@ import java.io.PrintStream;
 
 public class Kalender {
 
-    private ArrayList<Aftale> aftaler;
+    private ArrayList<Aftale> aftaler = new ArrayList<>();
     private File kalenderFil = new File("src\\HarryCotterProject\\Kalender.txt");
     public void tilfojAftaleTilKalender(Aftale a) {
         int index = 0;
@@ -26,7 +26,7 @@ public class Kalender {
             ps.println("Navn: " + a.getKunde().getKundenavn() + " Tlf: " + a.getKunde().getKundeTlfNr() +
                     " Pris: " + a.getPris() + ",- Tidspunkt: " + a.getDato());
             System.out.println("Aftalen er gemt og ser sådan ud:");
-            System.out.println("Navn: " + a.getKunde() + " Pris: " + a.getPris() + ",- Tidspunkt: ");// Er det her nødvendigt?
+            System.out.println("Navn: " + a.getKunde().getKundenavn() + " Pris: " + a.getPris() + ",- Tidspunkt: " + a.getDato());// Er det her nødvendigt?
 
         } catch (FileNotFoundException e) {
             System.out.println("Filen blev ikke fundet. Prøv igen");
