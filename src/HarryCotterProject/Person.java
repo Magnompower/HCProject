@@ -8,4 +8,5 @@ public class Person {
         this.navn = navn;
         this.id = id;
     }
+    
 }
