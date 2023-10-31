@@ -1,19 +1,22 @@
 package HarryCotterProject;
 
 public class Kunde {
-    String kundeNavn;
-    int kundeID;
-    int telefonnummer;
-    String email;
+    private String kundeNavn;
+    private int kundeTlfNr;
 
-    public Kunde(String kundeNavn, int kundeID, int telefonnummer, String email) {
+    public Kunde(String kundeNavn, int kundeTlfNr) {
         this.kundeNavn = kundeNavn;
-        this.kundeID = kundeID;
-        this.telefonnummer = telefonnummer;
-        this.email = email;
+        this.kundeTlfNr = kundeTlfNr;
     }
-public void betal(){
 
-}
+
+    public String getKundenavn(){
+        return kundeNavn;
+    }
+
+    public int getKundeTlfNr(){
+        return kundeTlfNr;
+    }
+
 }
 
