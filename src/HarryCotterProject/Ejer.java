@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Ejer extends Personale {
-    private File regnskabFil = new File("src\\HarryCotterProject\\Regnskab.txt");
     Scanner filescanner = null;
     Scanner scanner = new Scanner(System.in);
 

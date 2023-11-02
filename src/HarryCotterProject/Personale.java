@@ -3,6 +3,7 @@ package HarryCotterProject;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Personale extends Person {
@@ -33,13 +34,36 @@ public class Personale extends Person {
         } catch (Exception e) {
             System.out.println("Noget gik galt. Prøv forfra, ellers du for den bagfra.");
         }
-
     }
 
-    private void vaelgDatoForAftale(Kalender kalender) {
+    private LocalDate vaelgDatoForAftale(Kalender kalender) {
+
         System.out.println("Vælg Dato for aftale:");
-        kalender.indtastDato();
-//        visLedigeTiderIKalender();
+
+        LocalDate valgtDato = kalender.indtastDato();
+        ArrayList<Aftale> aftaler = kalender.getAftaler();
+        Aftale[] tider = (new Aftale[7]);
+
+        for (Aftale a : aftaler) {
+            LocalTime tidspunkt = a.getTidspunkt();
+            int time = tidspunkt.getHour();
+            if (a.getDato().isEqual(valgtDato)) {
+                if (time >= 10 && time <= 17) {
+                    tider[time - 10] = a;
+                }
+            }
+        }
+
+        for (int i = 0; i < tider.length; i++) {
+            if (tider[i] != null) {
+                System.out.println(tider[i].getKunde().getKundenavn() + ": " +
+                        tider[i].getTidspunkt() + "-" + tider[i].getTidspunkt().plusHours(1)+".");
+            } else {
+                System.out.println("Frit tidsrum");
+            }
+        }
+
+        return valgtDato;
     }
 
     private Kunde opretKunde() {

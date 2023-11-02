@@ -39,9 +39,11 @@ public class Kalender {
         try {
             ps = new PrintStream((kalenderFil));
             for (int i = 0; i < aftaler.size(); i++) {
-                ps.println(aftaler.get(i).getKunde().getKundenavn() + ", " +
-                        aftaler.get(i).getKunde().getKundeTlfNr() + ", " + aftaler.get(i).getPris() +
-                        ", " + aftaler.get(i).getDato() + ", " + aftaler.get(i).getTidspunkt());
+                ps.println(aftaler.get(i).getDato() + ", " + aftaler.get(i).getTidspunkt() +
+                        ", " + aftaler.get(i).getKunde().getKundenavn() +
+                        ", " + aftaler.get(i).getKunde().getKundeTlfNr() +
+                        ", " + aftaler.get(i).getPris() +
+                        ", " + aftaler.get(i).getBetaling());
             }
         } catch (FileNotFoundException e) {
             System.out.println("Filen blev ikke fundet. Prøv igen");
