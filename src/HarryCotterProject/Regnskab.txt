@@ -1,8 +1,8 @@
-Hasan lugter
-Umådeligt meget
-tis på en bobbel so.
-KundeID: 12312 Pris: 123123 Dato: 01-02-1999 klokkeslæt; 10:00
-KundeID: 1234 Pris: 12432 Dato: 01-03-1999 16:30
-KundeID: 1 Pris: 200 Dato: 26-10-2023 16:30'
-KundeID: 11012 Pris: 200 Dato: 01-10-2202 16:30
-KundeID: 123 Pris: 422,- Dato: 10-10-2200 08:50
+sdaasd, 123, 123, 1992-01-15, 10:30,
+asd, 123, 123, 1999-10-10, 12:12, false
+oliver, 1231241, 123, 2000-12-12, 12:30
+knud, 123, 444, 2002-12-10, 17:00
+Hasan, 28983409, 200, 2020-11-01, 18:30
+Magne, 27180801, 200, 2023-11-01, 09:00
+Julius, 2000000, 113, 2023-12-12, 17:30
+asddas, 12344, 123, 1999-12-12, 12:12

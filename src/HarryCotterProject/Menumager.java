@@ -35,10 +35,7 @@ public class Menumager {
         } while (valg != 0);
     }
 //TODO GOD METODE HERUNDER???
-    public  void afslutFraAftale(Kalender kalender) {
-        valg = 0;
-        eksekverMenu(kalender);
-    }
+//    public  void afslutFraAftale(Kalender kalender) {        this.valg = getValg;        eksekverMenu(kalender); }
     public void gaaTilHovedmenuFraAftale(Kalender kalender){
         vaelgFraHovedmenu(kalender);
     }

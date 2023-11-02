@@ -10,7 +10,6 @@ public class Personale extends Person {
     private int betalingssum = 0;
     private Scanner filescanner = null;
     Scanner scanner = new Scanner(System.in);
-    private boolean betalt;
     int personaleType; // TODO SKAL DISSE BRUGES?
     int valg; //TODO SKAL DISSE BRUGES??
 
@@ -23,7 +22,8 @@ public class Personale extends Person {
         System.out.println("Du kan altid taste 9 for at gå til hovedmenu og 0 for at afslutte programmet.\n\n");
 
         try {
-            Aftale aftale = new Aftale(opretKunde(), indtastPris(), indtastDato(), indtastTidspunkt());
+            //vaelgDatoForAftale();
+            Aftale aftale = new Aftale(opretKunde(), 0, kalender.indtastDato(), indtastTidspunkt(), "mangler");
 
             kalender.gemIDokument(aftale);
             kalender.opdaterArraylistFraFil();
@@ -34,6 +34,12 @@ public class Personale extends Person {
             System.out.println("Noget gik galt. Prøv forfra, ellers du for den bagfra.");
         }
 
+    }
+
+    private void vaelgDatoForAftale(Kalender kalender) {
+        System.out.println("Vælg Dato for aftale:");
+        kalender.indtastDato();
+//        visLedigeTiderIKalender();
     }
 
     private Kunde opretKunde() {
@@ -95,25 +101,6 @@ public class Personale extends Person {
         return kundeTlfNr;
     }
 
-
-    private int indtastPris() {
-        int pris = 0;
-
-        boolean validIndput = false;
-        while (!validIndput) {
-            System.out.println("Skriv pris:");
-            try {
-                pris = Integer.parseInt(scanner.nextLine().trim());
-                validIndput = true;
-            } catch (NumberFormatException e) {
-                System.out.println("Ugyldig pris. Prøv igen.");
-
-            }
-        }
-        return pris;
-    }
-
-
     private LocalDate indtastDato() {
         String datoFormat = "^(\\d{4}-\\d{2}-\\d{2})$";
         DateTimeFormatter datoFormaterer = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -163,7 +150,7 @@ public class Personale extends Person {
 
     public void sletAftale(Kalender kalender) {
         System.out.println("Indtast det aftalenummer du vil slette.\n");
-        visKalender(kalender);
+        visHeleKalenderen(kalender);
         int vaelgAftale = scanner.nextInt();
         int aftaleDerSlettes = vaelgAftale - 1;
 
@@ -171,7 +158,7 @@ public class Personale extends Person {
             kalender.getAftaler().remove(aftaleDerSlettes);
             System.out.println("Aftale " + vaelgAftale + " er nu slettet.");
             System.out.println("Dette er den nye kalender");
-            visKalender(kalender);
+            visHeleKalenderen(kalender);
         } else {
             System.out.println("Der opstod en fejl. Prøv igen.");
         }
@@ -181,21 +168,45 @@ public class Personale extends Person {
 
     public void printIntroOgKalender(Kalender kalender) {
         System.out.println("Dette er kalenderen:\n");
-        visKalender(kalender);
+        visHeleKalenderen(kalender);
     }
 
 
-    public void visKalender(Kalender kalender) {
-
-        for (int i = 0; i < kalender.getAftaler().size(); i++) {
-            System.out.println("Aftalenummer: " + (i + 1) + ". Navn: " + kalender.getAftaler().get(i).getKunde().getKundenavn() + " Tlf: " + kalender.getAftaler().get(i).getKunde().getKundeTlfNr() + " Pris: " + kalender.getAftaler().get(i).getPris() + " Dato: " + kalender.getAftaler().get(i).getDato() + " Tidspunkt: " + kalender.getAftaler().get(i).getTidspunkt());
-        }
+    public void visHeleKalenderen(Kalender kalender) {
+        kalender.printHelekalender();
+//        System.out.println("Tryk 1 hvis du vil se alle tider. Tryk 2 hvis du vil se tider en spicifik dag.");
+        //Skal også kunne vise for en bestemt dag.
     }
 
     public void modtagBetaling(Kalender kalender) {
-        System.out.println("Vælg aftale:");
-        kassebeholdning = kassebeholdning + betalingssum;
-        betalt = true;
+
+        String betaling = "betalt";
+        int aftaleValg;
+        System.out.println("Vælg aftalenummer:");
+        visHeleKalenderen(kalender);
+        aftaleValg = scanner.nextInt();
+
+        kalender.getAftaler().get(aftaleValg - 1).setPris(indtastPris(kalender));
+        kalender.getAftaler().get(aftaleValg - 1).setBetaling(betaling);
+        System.out.println("Aftalenummer: " + aftaleValg + ". betalingsstatus: " +
+                kalender.getAftaler().get(aftaleValg - 1).getBetaling());
+    }
+
+    private int indtastPris(Kalender kalender) { //Skal rykkes til kalender
+        int pris = 0;
+
+        boolean validIndput = false;
+        while (!validIndput) {
+            System.out.println("Skriv pris:");
+            try {
+                scanner.nextLine();//SCANNERBUG
+                pris = Integer.parseInt(scanner.nextLine().trim());
+                validIndput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldig pris. Prøv igen.");
+            }
+        }
+        return pris;
     }
 }
 

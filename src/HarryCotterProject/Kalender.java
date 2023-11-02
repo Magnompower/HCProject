@@ -79,7 +79,7 @@ public class Kalender {
     public Aftale opretAftaleFraString(String linje) {
         DateTimeFormatter datoFormaterer = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter tidsFormaterer = DateTimeFormatter.ofPattern("HH:mm");
-        String[] dele = new String[4];
+        String[] dele;
         dele = linje.split(", ");
         int kundeTlfNr = Integer.parseInt(dele[1]); //
         Kunde kunde = new Kunde(dele[0], kundeTlfNr);
@@ -87,7 +87,8 @@ public class Kalender {
         int pris = Integer.parseInt(dele[2]);
         LocalDate dato = LocalDate.parse(dele[3], datoFormaterer);
         LocalTime tidspunkt = LocalTime.parse(dele[4], tidsFormaterer);
-        return new Aftale(kunde, pris, dato, tidspunkt);
+        String betaling = dele[5];
+        return new Aftale(kunde, pris, dato, tidspunkt, betaling);
         // TODO OPRET SEPERAT METODE SOM PARSER!
     }
 }
