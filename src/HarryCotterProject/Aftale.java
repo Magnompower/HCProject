@@ -4,42 +4,51 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
+
 
 public class Aftale {
 
-    Kunde kunde;
+    String kundeNavn;
+    int kundeTlfNr;
     private int pris;
-    private LocalDateTime dato;
+    LocalDate dato;
+    LocalTime tidspunkt;
+    LocalDateTime datoOgTid;
     private boolean betalt;
-    ArrayList<Aftale> regnskab;
+    Kunde kunde;
 
 
-    public Aftale(Kunde kunde, int pris, boolean betalt, String datoInput, String tidspunktIndput) {
-        this.kunde = kunde;
+    public Aftale(Kunde kunde, int pris, LocalDate dato, LocalTime tidspunkt) {
         this.pris = pris;
-        this.betalt = betalt;
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.GERMAN);
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        LocalDate dato = LocalDate.parse(datoInput, dateFormatter);
-        LocalTime tid = LocalTime.parse(tidspunktIndput, timeFormatter);
-        //Der mangler at tage højde for hvis der ikke indtastes et gyldigt format.
-
-        this.dato = LocalDateTime.of(dato, tid);
+        this.kunde = kunde;
+        this.dato = dato;
+        this.tidspunkt = tidspunkt;
+        this.datoOgTid = LocalDateTime.of(dato, tidspunkt);
     }
 
+    public void setBetalt(boolean betalt) {
+        this.betalt = true;
+    }
 
     public int getPris() {
         return pris;
     }
 
-    public LocalDateTime getDato() {
+    public LocalDate getDato() {
         return dato;
+    }
+
+    public LocalTime getTidspunkt() {
+        return tidspunkt;
+    }
+
+    public LocalDateTime getDatoOgTid() {
+        return datoOgTid;
     }
 
     public Kunde getKunde() {
         return kunde;
     }
+
 
 }
