@@ -1,18 +1,16 @@
 package HarryCotterProject;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Personale extends Person {
-    private int kassebeholdning = 0;
-    private int betalingssum = 0;
     private Scanner filescanner = null;
     Scanner scanner = new Scanner(System.in);
-    int personaleType; // TODO SKAL DISSE BRUGES?
-    int valg; //TODO SKAL DISSE BRUGES??
 
     public Personale(String navn, int id) {
         super(navn, id);
@@ -20,16 +18,12 @@ public class Personale extends Person {
 
 
     public void opretAftale(Kalender kalender) {
-        System.out.println("Du kan altid taste 9 for at gå til hovedmenu og 0 for at afslutte programmet.\n\n");
-
         try {
-            //vaelgDatoForAftale();
-            Aftale aftale = new Aftale(opretKunde(), 0, kalender.indtastDato(), indtastTidspunkt(), "mangler");
+            Aftale aftale = new Aftale(vaelgDatoForAftale(kalender), indtastTidspunkt(), opretKunde(), 0, "mangler");
 
             kalender.gemIDokument(aftale);
             kalender.opdaterArraylistFraFil();
             printConfirmation(aftale);
-
 
         } catch (Exception e) {
             System.out.println("Noget gik galt. Prøv forfra, ellers du for den bagfra.");
@@ -57,7 +51,7 @@ public class Personale extends Person {
         for (int i = 0; i < tider.length; i++) {
             if (tider[i] != null) {
                 System.out.println(tider[i].getKunde().getKundenavn() + ": " +
-                        tider[i].getTidspunkt() + "-" + tider[i].getTidspunkt().plusHours(1)+".");
+                        tider[i].getTidspunkt() + "-" + tider[i].getTidspunkt().plusHours(1) + ".");
             } else {
                 System.out.println("Frit tidsrum");
             }
@@ -81,23 +75,20 @@ public class Personale extends Person {
             kundeNavn = scanner.nextLine().trim();
             if (kundeNavn.isEmpty()) {
                 System.out.println("Feltet må ikke være tomt. Prøv igen.");
-            } else if (kundeNavn.equals("9")) {
-//                Menumager menumager = new Menumager(Ejer,Personale);
-//                Menumager.afslutFraAftale(kalender);
-//                menumager.eksekverMenu(); // Skal gå til hovedmenu på 9 Variabel der går frem og tilbage?
+            }
+            //TODO Hvis man vælger numre uden kode går den til hovedmenu - Det skal den kun ved nr 9.
+            /*else if (kundeNavn.equals("9")) {
+                Menumager menumager = new Menumager(Ejer,Personale);
+                Menumager.afslutFraAftale(kalender);
+                menumager.eksekverMenu(); // Skal gå til hovedmenu på 9 Variabel der går frem og tilbage?
             } else if (kundeNavn.equals("0")) {
                 retunerValgNull();
-//                menumager.afslutProgram(menumager); // Skal aflsutte på 0
-            }
+                menumager.afslutProgram(menumager); // Skal aflsutte på 0
+            }*/
 
         }
 
         return kundeNavn;
-    }
-
-    private int retunerValgNull() {
-        valg = 0;
-        return valg;
     }
 
     private int indtastTlfNr() {
@@ -125,30 +116,13 @@ public class Personale extends Person {
         return kundeTlfNr;
     }
 
-    private LocalDate indtastDato() {
-        String datoFormat = "^(\\d{4}-\\d{2}-\\d{2})$";
-        DateTimeFormatter datoFormaterer = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        while (true) {
-            System.out.println("Skriv dato([ÅÅÅÅ-MM-DD]):");
-            String dato = scanner.nextLine().trim();
-
-            if (dato.matches(datoFormat)) {
-                try {
-                    return LocalDate.parse(dato, datoFormaterer);
-                } catch (Exception e) {
-                    System.out.println("Ugyldig dato. Prøv igen.");
-                }
-            } else {
-                System.out.println("Ugyldigt datoformat. Prøv igen");
-            }
-        }
-    }
-
-    private LocalTime indtastTidspunkt() {
+    private LocalTime indtastTidspunkt() { //Skal rykkes til kalender
         String tidsformat = "^(\\d{2}:\\d{2})$";
         DateTimeFormatter tidsFormaterer = DateTimeFormatter.ofPattern("HH:mm");
 
+// TODO MAN MÅ ALDRIG SKRIVE WHILE(TRUE)
+        // RETURN SKAL OGSÅ KOMME UDENFRO TRY
         while (true) {
             System.out.println("Skriv tidspunkt( [TT:MM]):");
             String tidspunkt = scanner.nextLine().trim();
@@ -168,7 +142,9 @@ public class Personale extends Person {
 
     private void printConfirmation(Aftale a) {
         System.out.println("\nDin aftale ser sådan ud:\n");
-        System.out.println("Navn: " + a.getKunde().getKundenavn() + " Tlf: " + a.getKunde().getKundeTlfNr() + " Pris: " + a.getPris() + ",- Dato: " + a.getTidspunkt() + " Tidspunkt: " + a.getDato());
+        System.out.println("Dato: " + a.getDato() + " Tidspunkt: " + a.getTidspunkt()
+                + " Navn: " + a.getKunde().getKundenavn() + " Tlf: " + a.getKunde().getKundeTlfNr() +
+                " Pris: " + a.getPris() + ",- Betaling: " + a.getBetaling());
     }
 
 
@@ -186,8 +162,6 @@ public class Personale extends Person {
         } else {
             System.out.println("Der opstod en fejl. Prøv igen.");
         }
-
-
     }
 
     public void printIntroOgKalender(Kalender kalender) {

@@ -2,6 +2,7 @@ package HarryCotterProject;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,10 +14,32 @@ public class Kalender {
 
     private File kalenderFil = new File("src\\HarryCotterProject\\Kalender.txt");
 
+    Scanner scanner = new Scanner(System.in);
+
     public void tilfojAftaleTilKalender(Aftale a) {
         int index = 0;
         while (index < aftaler.size() && a.getDatoOgTid().isAfter(aftaler.get(index).getDatoOgTid())) index++;
         aftaler.add(index, a); //fejl her?
+    }
+
+    public LocalDate indtastDato() {
+        String datoFormat = "^(\\d{4}-\\d{2}-\\d{2})$";
+        DateTimeFormatter datoFormaterer = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        while (true) {
+            System.out.println("Skriv dato([ÅÅÅÅ-MM-DD]):");
+            String dato = scanner.nextLine().trim();
+
+            if (dato.matches(datoFormat)) {
+                try {
+                    return LocalDate.parse(dato, datoFormaterer);
+                } catch (Exception e) {
+                    System.out.println("Ugyldig dato. Prøv igen.");
+                }
+            } else {
+                System.out.println("Ugyldigt datoformat. Prøv igen");
+            }
+        }
     }
 
 
@@ -26,9 +49,9 @@ public class Kalender {
         try {
             os = new FileOutputStream(kalenderFil, true);
             ps = new PrintStream(os);
-            ps.println(aftale.getKunde().getKundenavn() + ", " +
-                    aftale.getKunde().getKundeTlfNr() + ", " + aftale.getPris() +
-                    ", " + aftale.getDato() + ", " + aftale.getTidspunkt());
+            ps.println(aftale.getDato() + ", " + aftale.getTidspunkt() + ", " + aftale.getKunde().getKundenavn() +
+                    ", " + aftale.getKunde().getKundeTlfNr() + ", " + aftale.getPris() +
+                    ", " + aftale.getBetaling());
         } catch (Exception e) {
             System.out.println("Der opstod en fejl. Prøv igen.");
         } // Vi kan ikke få lov til at lukke streamsne...
@@ -83,15 +106,41 @@ public class Kalender {
         DateTimeFormatter tidsFormaterer = DateTimeFormatter.ofPattern("HH:mm");
         String[] dele;
         dele = linje.split(", ");
-        int kundeTlfNr = Integer.parseInt(dele[1]); //
-        Kunde kunde = new Kunde(dele[0], kundeTlfNr);
+        int kundeTlfNr = Integer.parseInt(dele[3]); //
+        Kunde kunde = new Kunde(dele[2], kundeTlfNr);
 
-        int pris = Integer.parseInt(dele[2]);
-        LocalDate dato = LocalDate.parse(dele[3], datoFormaterer);
-        LocalTime tidspunkt = LocalTime.parse(dele[4], tidsFormaterer);
+        int pris = Integer.parseInt(dele[4]);
+        LocalDate dato = LocalDate.parse(dele[0], datoFormaterer);
+        LocalTime tidspunkt = LocalTime.parse(dele[1], tidsFormaterer);
         String betaling = dele[5];
-        return new Aftale(kunde, pris, dato, tidspunkt, betaling);
+        return new Aftale(dato, tidspunkt, kunde, pris, betaling);
         // TODO OPRET SEPERAT METODE SOM PARSER!
+    }
+
+
+    public void printRegskabForDato() {
+        LocalDate valgtDato = indtastDato();
+
+        for (int i = 0; i < aftaler.size(); i++) {
+            if (aftaler.get(i).getDato().isEqual(valgtDato)) {
+                System.out.println("Dato: " + aftaler.get(i).getDato() +
+                        " Tidspunkt: " + aftaler.get(i).getTidspunkt() +
+                        " Navn: " + aftaler.get(i).getKunde().getKundenavn() +
+                        " Pris: " + aftaler.get(i).getPris() +
+                        " Betalingsstatus: " + aftaler.get(i).getBetaling());
+            }
+        }
+    }
+
+
+    public void printHelekalender() {
+        for (int i = 0; i < aftaler.size(); i++) {
+            System.out.println("Aftalenummer: " + (i + 1) + ". Navn: " +
+                    aftaler.get(i).getKunde().getKundenavn() + " Tlf: " +
+                    aftaler.get(i).getKunde().getKundeTlfNr() + " Pris: " +
+                    aftaler.get(i).getPris() + " Dato: " + aftaler.get(i).getDato() +
+                    " Tidspunkt: " + aftaler.get(i).getTidspunkt());
+        }
     }
 }
 

@@ -34,8 +34,6 @@ public class Menumager {
             }
         } while (valg != 0);
     }
-//TODO GOD METODE HERUNDER???
-//    public  void afslutFraAftale(Kalender kalender) {        this.valg = getValg;        eksekverMenu(kalender); }
     public void gaaTilHovedmenuFraAftale(Kalender kalender){
         vaelgFraHovedmenu(kalender);
     }
@@ -57,7 +55,7 @@ public class Menumager {
             case 2 -> ejer.sletAftale(kalender);
             case 3 -> ejer.printIntroOgKalender(kalender);
             case 4 -> ejer.modtagBetaling(kalender);
-            case 5 -> ejer.visRegnskab();
+            case 5 -> ejer.visHeleRegnskab(kalender);
             case 9 -> visHovedmenu(kalender);
             default -> {
                 System.out.println("Ugyldigt valg. Prøv igen.");
@@ -86,8 +84,8 @@ public class Menumager {
         int valg = scanner.nextInt();
         switch (valg) {
             case 0 -> afslutProgram();
-            case 1 -> ejer.visRegnskab();
-            case 2 -> ejer.vaelgDatoRegnskab();
+            case 1 -> ejer.visHeleRegnskab(kalender);
+            case 2 -> kalender.printRegskabForDato();
             case 9 -> visHovedmenu(kalender);
             default -> {
                 System.out.println("Ugyldigt valg. Prøv igen.");
@@ -95,7 +93,6 @@ public class Menumager {
         }
 
     }
-//    TODO hvis invalid svar dør programmet.1
 
     public void afslutProgram() {
         valg = 0;
